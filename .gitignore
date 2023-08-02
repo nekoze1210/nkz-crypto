@@ -18,6 +18,7 @@ lib-cov
 
 # Coverage directory used by tools like istanbul
 coverage
+coverage.json
 *.lcov
 
 # node-waf configuration
@@ -58,3 +59,11 @@ out
 
 # JetBrains IDE
 .idea
+
+# typechain
+typechain
+typechain-types
+
+# Hardhat files
+cache
+artifacts
