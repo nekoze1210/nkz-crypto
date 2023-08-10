@@ -39,15 +39,15 @@ contract NkzNftTest is Test {
         address someRandomUser = vm.addr(1);
         vm.prank(someRandomUser);
         vm.deal(someRandomUser, 1 ether);
-        uint mintAmount = 100;
+        uint256 mintAmount = 100;
         nkzNft.mint(mintAmount);
         assertEq(nkzNft.totalSupply(), mintAmount);
         assertEq(nkzNft.tokensOfOwner(someRandomUser).length, mintAmount);
         assertEq(nkzNft.balanceOf(someRandomUser), mintAmount);
 
         uint256[] memory tokens = nkzNft.tokensOfOwner(someRandomUser);
-        uint startTokenId = 1;
-        for (uint i = startTokenId; i <= tokens.length; i++) {
+        uint256 startTokenId = 1;
+        for (uint256 i = startTokenId; i <= tokens.length; i++) {
             assertEq(nkzNft.tokenURI(i), string(abi.encodePacked(baseURI, i.toString(), nkzNft.metadataExtension())));
             assertEq(nkzNft.ownerOf(i), someRandomUser);
         }

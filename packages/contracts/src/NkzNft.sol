@@ -4,10 +4,10 @@ pragma solidity ^0.8.17;
 import "ERC721A/contracts/ERC721A.sol";
 import "openzeppelin-contracts/contracts/access/Ownable.sol";
 import "openzeppelin-contracts/contracts/utils/Strings.sol";
-import {console2} from "forge-std/Test.sol";
 
 contract NkzNft is ERC721A, Ownable {
     using Strings for uint256;
+
     string public baseURI;
     string public metadataExtension = ".json";
     mapping(address => uint256[]) private _ownedTokens;
@@ -24,10 +24,10 @@ contract NkzNft is ERC721A, Ownable {
         baseURI = _newBaseURI;
     }
 
-    function mint(uint _quantity) external payable {
+    function mint(uint256 _quantity) external payable {
         uint256 _currentIndex = totalSupply();
         _mint(msg.sender, _quantity);
-        for (uint i = _currentIndex; i < totalSupply(); i++) {
+        for (uint256 i = _currentIndex; i < totalSupply(); i++) {
             _ownedTokens[msg.sender].push(i);
         }
     }
