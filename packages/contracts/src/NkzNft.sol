@@ -10,6 +10,7 @@ contract NkzNft is ERC721A, Ownable {
 
     string public baseURI;
     string public metadataExtension = ".json";
+    bool private _isRevealed = false;
 
     constructor(string memory _name, string memory _symbol, string memory _baseURI) ERC721A(_name, _symbol) {
         baseURI = _baseURI;
@@ -23,11 +24,18 @@ contract NkzNft is ERC721A, Ownable {
         baseURI = _newBaseURI;
     }
 
+    function setIsRevealed(bool flag) public onlyOwner {
+        _isRevealed = flag;
+    }
+
     function mint(uint256 _quantity) external payable {
         _mint(msg.sender, _quantity);
     }
 
     function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
+        if (!_isRevealed) {
+            return string(abi.encodePacked(baseURI, "0", metadataExtension));
+        }
         return string(abi.encodePacked(baseURI, tokenId.toString(), metadataExtension));
     }
 

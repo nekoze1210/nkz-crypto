@@ -24,6 +24,7 @@ contract NkzNftTest is Test {
     }
 
     function testMint() public {
+        nkzNft.setIsRevealed(true);
         address someRandomUser = vm.addr(1);
         vm.prank(someRandomUser);
         vm.deal(someRandomUser, 1 ether);
@@ -35,6 +36,7 @@ contract NkzNftTest is Test {
     }
 
     function testMultipleMint() public {
+        nkzNft.setIsRevealed(true);
         address someRandomUser = vm.addr(1);
         vm.prank(someRandomUser);
         vm.deal(someRandomUser, 1 ether);
