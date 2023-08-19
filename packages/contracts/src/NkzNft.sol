@@ -10,7 +10,6 @@ contract NkzNft is ERC721A, Ownable {
 
     string public baseURI;
     string public metadataExtension = ".json";
-    mapping(address => uint256[]) private _ownedTokens;
 
     constructor(string memory _name, string memory _symbol, string memory _baseURI) ERC721A(_name, _symbol) {
         baseURI = _baseURI;
@@ -25,15 +24,7 @@ contract NkzNft is ERC721A, Ownable {
     }
 
     function mint(uint256 _quantity) external payable {
-        uint256 _currentIndex = totalSupply();
         _mint(msg.sender, _quantity);
-        for (uint256 i = _currentIndex; i < totalSupply(); i++) {
-            _ownedTokens[msg.sender].push(i);
-        }
-    }
-
-    function tokensOfOwner(address _owner) public view returns (uint256[] memory) {
-        return _ownedTokens[_owner];
     }
 
     function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {

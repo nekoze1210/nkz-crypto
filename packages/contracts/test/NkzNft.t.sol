@@ -29,7 +29,6 @@ contract NkzNftTest is Test {
         vm.deal(someRandomUser, 1 ether);
         nkzNft.mint(1);
         assertEq(nkzNft.totalSupply(), 1);
-        assertEq(nkzNft.tokensOfOwner(someRandomUser).length, 1);
         assertEq(nkzNft.ownerOf(1), someRandomUser);
         assertEq(nkzNft.balanceOf(someRandomUser), 1);
         assertEq(nkzNft.tokenURI(1), string(abi.encodePacked(baseURI, "1", nkzNft.metadataExtension())));
@@ -42,12 +41,10 @@ contract NkzNftTest is Test {
         uint256 mintAmount = 100;
         nkzNft.mint(mintAmount);
         assertEq(nkzNft.totalSupply(), mintAmount);
-        assertEq(nkzNft.tokensOfOwner(someRandomUser).length, mintAmount);
         assertEq(nkzNft.balanceOf(someRandomUser), mintAmount);
 
-        uint256[] memory tokens = nkzNft.tokensOfOwner(someRandomUser);
         uint256 startTokenId = 1;
-        for (uint256 i = startTokenId; i <= tokens.length; i++) {
+        for (uint256 i = startTokenId; i <= 100; i++) {
             assertEq(nkzNft.tokenURI(i), string(abi.encodePacked(baseURI, i.toString(), nkzNft.metadataExtension())));
             assertEq(nkzNft.ownerOf(i), someRandomUser);
         }
